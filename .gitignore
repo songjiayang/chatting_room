@@ -1,3 +1,4 @@
+
 #Ingore config 
 /config/database.yml
 /config/environments/production.rb
@@ -26,6 +27,5 @@
 *.rdoc
 .project
 
-Gemfile.lock
 dump.rdb
 tmp/pids/server.pid
