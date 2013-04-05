@@ -1,11 +1,11 @@
 source 'http://ruby.taobao.org'
+
 gem 'rails', '3.2.13'
 
 gem 'mysql2'
+
 gem 'thin'
 gem 'faye'
-
-gem 'pg', group: :production
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
