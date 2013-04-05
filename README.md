@@ -16,7 +16,8 @@ Chater 是一个在线聊天室，一个实时web应用，一个比较新的技�
 ```
 ##Dependences
 
-[rails](http://rubyonrails.org/),[faye](http://faye.jcoglan.com/)
+* [rails](http://rubyonrails.org/)
+* [faye](http://faye.jcoglan.com/)
 
 
 ##参考文档

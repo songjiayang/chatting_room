@@ -1,18 +1,49 @@
-<div class="chat_container">
-  <div id="chat_room">
-    <p class="alert"> Welcome to the chat room <span id="user_name"><%= session[:username] %>!</span> </p>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span9">
+      <p class='alert alert-success welcome-message'> 
+        Welcome to the chat room <span id="user_name"><%= session[:username] %>!</span> 
+      </p>
+      <div class="messages">
+      </div>
+      <div id="input-area">
+        <textarea  id="message" class="input-xlarge"></textarea>
+        <button class="btn btn-success"  id="submit">Send</button>
+        <span class="notice">支持markdown</span>
+      </div>
+    </div>
+    <div class="span2">
+      <div class='well sidebar-nav fenxiang' >
+          <h3 class='nav-header'>喜欢我就分享我吧</h3>
+          <div class='fenxiang-button my_border'>
+              <div class="jiathis_style_24x24">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_renren"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+              </div>
+              <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1353687894005453" charset="utf-8"></script>
+          </div>  
+      </div>
+      <div class='well sidebar-nav'>
+          <h3 class='nav-header'>主题</h3>
+          <p class='subject my_border'>
+            <%2.times do %>
+              基于faye的在线及时聊天
+            <%end%>
+          </p>
+      </div>
+    </div>
   </div>
-  <div class="messages"></div>
-  <form id="new_message_form">
-    <input type="text" id="message" name="message">
-    <input type="submit" value="Send">
-  </form>
 </div>
 
 <script>
   $(function() {
+    $('.messages').css('height',window.screen.height-285);
+    $('.subject').css('max-height',window.screen.height-550);
     var client = new Faye.Client('http://localhost:9292/faye');
-    $('#new_message_form').submit(function(){
+    $('#submit').click(function(){
       client.publish('/messages/new', {
         username: '<%= session[:username] %>',
         msg: $('#message').val()
@@ -21,4 +52,18 @@
       return false;
     });
   });
+
+  $(function(){  
+    var client = new Faye.Client('http://localhost:9292/faye');
+    client.subscribe("/messages/new",function(data){  
+      var a_new_message = ('<li><div class="user-avatar"> <img src="'+'http://l.ruby-china.org/user/large_avatar/827.jpg"');
+      a_new_message +='/></div><div class="info"><span class="username">';
+      a_new_message +=data.username;
+      a_new_message +=('</span><span >'+(parseInt($('.messages li').size())+1)+' 楼</span>');
+      a_new_message +=('<span >'+ current_time()+'</span>');
+      a_new_message +=('<p>'+data.msg+'</p></div></li>');
+      $('.messages').append(a_new_message);
+    });  
+  });  
 </script>
+
