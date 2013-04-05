@@ -1,0 +1,31 @@
+#Ingore config 
+/config/database.yml
+/config/environments/production.rb
+/config/initializers/session_store.rb
+/config/initializers/config.rb
+
+#Ingore db
+/db/development.sqlite3
+/db/schema.rb
+
+#Ingore log
+/log/*.log
+/log/identifying_code/*.jpg
+
+#Ingore public
+/public/plugin_assets
+/public/system/users/*
+
+#Ingore other
+/tmp/cache/*
+/vendor/*
+/test/*
+/script/log/*
+
+#Ingore the root_path
+*.rdoc
+.project
+
+Gemfile.lock
+dump.rdb
+tmp/pids/server.pid
