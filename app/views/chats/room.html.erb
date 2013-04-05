@@ -1,0 +1,24 @@
+<div class="chat_container">
+  <div id="chat_room">
+    <p class="alert"> Welcome to the chat room <span id="user_name"><%= session[:username] %>!</span> </p>
+  </div>
+  <div class="messages"></div>
+  <form id="new_message_form">
+    <input type="text" id="message" name="message">
+    <input type="submit" value="Send">
+  </form>
+</div>
+
+<script>
+  $(function() {
+    var client = new Faye.Client('http://localhost:9292/faye');
+    $('#new_message_form').submit(function(){
+      client.publish('/messages/new', {
+        username: '<%= session[:username] %>',
+        msg: $('#message').val()
+      });
+      $('#message').val('');
+      return false;
+    });
+  });
+</script>
