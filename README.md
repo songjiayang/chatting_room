@@ -1,8 +1,5 @@
-Chater
-======
-
 ##What is Chater?
-Chater 是一个在线聊天室，一个实时web应用，一个比较新的技术的探索.....
+Chater 是一个在线聊天室，一个实时web应用，一个基础实践.....
 
 ##How to run Chater?
 
@@ -22,3 +19,5 @@ Chater 是一个在线聊天室，一个实时web应用，一个比较新的技�
 
 ##参考文档
 * [How to Use Faye as a Real-Time Push Server in Rails](http://net.tutsplus.com/tutorials/ruby/how-to-use-faye-as-a-real-time-push-server-in-rails/)
+
+##Preview

@@ -29,3 +29,4 @@
 
 dump.rdb
 tmp/pids/server.pid
+Gemfile.lock

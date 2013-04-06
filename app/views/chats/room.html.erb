@@ -40,6 +40,7 @@
 
 <script>
   $(function() {
+    $('body').css('background',"url(<%=asset_path 'bg'+[1,2].sample(1).join+'.jpg'%>) no-repeat fixed bottom");
     $('.messages').css('height',window.screen.height-285);
     $('.subject').css('max-height',window.screen.height-550);
     var client = new Faye.Client('http://localhost:9292/faye');
