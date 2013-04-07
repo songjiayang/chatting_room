@@ -17,6 +17,7 @@ end
 gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'gravtastic'
+gem 'will_paginate'
 group :development do
     gem "better_errors"
 end

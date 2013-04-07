@@ -1,0 +1,23 @@
+<div class="container-fluid" style="margin-top:50px;">
+  <div class="row-fluid">        
+    <ul class='thumbnails'>
+      <%@rooms.each_with_index do |room,index|%>
+        <li class='room_list'>
+          <h5> 
+            <%=link_to room.title,chat_room_path(room),target:'_blank'%>
+            <a class='like unfav' title='Fav It'>❤</a>
+           </h5>
+        <p class='desc'><%=room.description%></p>
+        <p class='stats'>
+          <a class='left' title='Online Users Count' >9</a>
+          <a class='right' title='Messages Count'>12</a>
+        </p>
+       </li>
+      <%end%>
+    </ul>
+    <%= will_paginate @rooms %>
+  </div>
+</div>
+<script type="text/javascript">
+  $('body').css('background',"url(<%=asset_path 'bg2.jpg'%>) no-repeat fixed bottom");
+</script>

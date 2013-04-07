@@ -29,7 +29,7 @@
   width: 100%;
   border-radius:10px;
   overflow:auto;
-  background: rgba(20%, 50%, 80%, 0.5);
+  background: rgba(20%, 50%, 80%, 0.8);
 }
 
 
@@ -94,7 +94,80 @@
 	margin-top: 0px;
 }
 
-#user_name{
- color: #08C;
- font-weight:bold;
+.welcome-message span{
+	color: #08C;
+  font-weight:bold;
+}
+
+.room_list{
+	width: 20%;
+	display: block;
+  padding: 4px;
+  height:180px;
+  position:relative;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.7);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  border: 1px solid #DDD;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 3px 2px  rgba(0, 0, 0,0.8);
+  -moz-box-shadow: 0 3px 2px rgba(0, 0, 0, 0.8);
+   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.8);
+}
+.thumbnails li{
+	margin-left:2%;
+}
+
+.room_list h5{
+	font-size:16px;
+	border-bottom:1px solid #ccc;
+	padding:5px;
+}
+
+.room_list a:hover {
+	cursor: pointer;
+	color:#ff0033;
+  text-decoration:none;
+}
+
+.room_list .like{
+	float:right;
+  margin-right:2px;
+  font-size:18px;
+  color:#646464;
+}
+
+.room_list .left{
+  float:left;
+  margin-left:4px;
+  font-size:14px;
+  color:#646464;
+  font-weight: bold;
+}
+
+.room_list .right{
+   position:absolute;
+   margin-left: 83%;
+   color:#646464;
+   font-size:14px;
+   font-weight: bold;
+}
+
+
+.room_list .desc{
+	padding: 4px;
+	font-size: 14px;
+	height: 97px;
+}
+
+.thumbnails{
+	padding-left: 8%;
+}
+
+
+.pagination{
+	text-align: center;
 }
