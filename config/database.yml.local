@@ -5,7 +5,7 @@
    encoding: utf8
    pool: 10
    username: root
-   password: 
+   password: password
    host: localhost
    port: 3306
  
@@ -20,12 +20,6 @@
    <<: *common
    
 #production config    
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: test-postgres_production
-  pool: 5
-  username: test-postgres
-  password:
-  host: 127.0.0.1
-
+ production:
+   <<: *common
+   database: chater
