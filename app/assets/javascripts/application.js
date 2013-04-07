@@ -31,3 +31,13 @@ function current_time () {
   context2D.fillStyle=grd;
   context2D.fill();
  }
+
+
+function sent_message(){
+    faye.publish('/room/<%=@room.id%>/messages/new', {
+        username: '<%= session[:username] %>',
+        msg: $('#message').val()
+    });
+    $('#message').val('');
+    return false;
+  }
