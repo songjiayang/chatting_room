@@ -1,2 +1,4 @@
 # Profile
-web: rackup faye.ru -E production -s thin
+web: bundle exec thin -E production -s thin -R faye.ru start
+
+# rackup faye.ru -E production -s thin
