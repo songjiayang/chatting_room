@@ -45,7 +45,8 @@
     }else{
       faye.publish('/room/<%=@room.id%>/messages/new', {
           username: '<%= session[:username] %>',
-          msg: $('#message').val()
+          msg: $('#message').val(),
+          avater: '<%=session[:avater]%>'
       });
       $('#message').val('');
     }
@@ -67,7 +68,7 @@
     if (e.which ==17){sent_message()};
   });
   faye.subscribe("/room/<%=@room.id%>/messages/new",function(data){  
-      var a_new_message = ('<li><div class="user-avatar"> <img src="'+'<%=session[:avater]%>"');
+      var a_new_message = ('<li><div class="user-avatar"> <img src="'+data.avater+'"');
       a_new_message +='/></div><div class="info"><span class="username">';
       a_new_message +=data.username;
       a_new_message +=('</span><span >'+(parseInt($('.messages li').size())+1)+' 楼</span>');
