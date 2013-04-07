@@ -8,6 +8,9 @@ Chater 是一个在线聊天室，一个实时web应用，一个基础实践....
   cd chater
   bundle 
   rackup faye.ru -E production -s thin       #启动faye
+  bundle exec rake db:create
+  bundle exec rake db:migrate
+  bundle exec rake db:seed
   rails s
 
 ```
@@ -21,3 +24,4 @@ Chater 是一个在线聊天室，一个实时web应用，一个基础实践....
 * [How to Use Faye as a Real-Time Push Server in Rails](http://net.tutsplus.com/tutorials/ruby/how-to-use-faye-as-a-real-time-push-server-in-rails/)
 
 ##Preview
+* 演示地址:[chater](http://weidaxue.me:4000)

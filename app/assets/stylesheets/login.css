@@ -1,0 +1,40 @@
+.login_form{
+	width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 200px;
+}
+
+
+.login_form .input-small{
+	width: 228px;
+	height: 38px;
+	line-height: 38px;
+	border: 1px solid #84A4C1;
+	padding: 0 9px;
+	margin-right: 10px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #B7CDD8;
+}
+
+.login_form .input-small.focus{
+	border-color: #2982FF;
+  color: black;
+}
+
+.login_form #login-button{
+	height: 38px;
+	text-align: center;
+	padding-top: 8px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+}
+
+.login_form p {
+	margin-right: 10px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #2982FF;
+	line-height: 80px;
+}
