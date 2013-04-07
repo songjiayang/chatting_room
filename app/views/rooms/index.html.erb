@@ -1,3 +1,4 @@
+<canvas id="myCanvas" width="100" height="100" data-content="Welcome to Chater,<%=session['username']%>!">很不幸，你的浏览器版本太低，赶快去升个级吧～～</canvas>
 <div class="container-fluid" style="margin-top:50px;">
   <div class="row-fluid">        
     <ul class='thumbnails'>
@@ -20,4 +21,15 @@
 </div>
 <script type="text/javascript">
   $('body').css('background',"url(<%=asset_path 'bg2.jpg'%>) no-repeat fixed bottom");
+  var c=document.getElementById("myCanvas");
+  var ctx=c.getContext("2d");
+  draw_happy_face(ctx);
+  $('#myCanvas').mouseover(function() {
+     $('#myCanvas').popover('show');
+  });
+   $('#myCanvas').mouseout(function() {
+     $('#myCanvas').popover('hide');
+  });
+ 
 </script>
+

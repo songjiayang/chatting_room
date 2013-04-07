@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+
+	before_filter :authcation_with_user
   
   def index
   	redirect_to login_path unless session[:username]

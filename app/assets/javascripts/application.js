@@ -19,3 +19,15 @@ function current_time () {
   if (sec<0) {sec= "0"+sec};
   return year+"-"+mon+"-"+date+" "+hour+":"+min+":"+sec
 }
+
+
+ function draw_happy_face(context2D)
+ {
+  context2D.beginPath();
+  context2D.arc(50,50,40,0,Math.PI*2,true);
+  var grd=context2D.createRadialGradient(25,50,0,50,50,150);
+  grd.addColorStop(0,"#ffff33");
+  grd.addColorStop(1,"#ff6600");
+  context2D.fillStyle=grd;
+  context2D.fill();
+ }

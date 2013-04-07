@@ -1,6 +1,7 @@
-<p>彩云自由聊天室</p>
-<%= form_tag login_path do |f| %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username %>
-  <%= submit_tag "Enter" %>
+<div class='login_form'>
+  <p>无需注册即可登录Chater , 轻松享受群组聊天的乐趣</p>
+<%= form_tag login_path,class:'form-inline'  do |f| %>
+  <%= text_field_tag :username,'', class:"input-small",placeholder:"Chater昵称"%>
+  <%= submit_tag "登录",class:'btn btn-info btn-large',id:'login-button' %>
 <% end %>
+</div>
