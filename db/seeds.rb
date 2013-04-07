@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+Room.destroy_all
+22.times do |index|
+		Room.create({title:"room with id #{index+1}",description:"the description of room-#{index+1}"})
+end

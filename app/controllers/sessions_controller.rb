@@ -5,6 +5,6 @@ class SessionsController < ApplicationController
 
   def create
   	session[:username] = params[:username]
-    redirect_to chat_path
+    redirect_to chat_rooms_path
   end
 end

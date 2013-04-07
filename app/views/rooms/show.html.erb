@@ -2,7 +2,10 @@
   <div class="row-fluid">
     <div class="span9">
       <p class='alert alert-success welcome-message'> 
-        Welcome to the chat room <span id="user_name"><%= session[:username] %>!</span> 
+        Welcome to the 
+        <span id="room_title"><%=@room.title%></span> 
+        chat room 
+        <span id="user_name"><%= session[:username] %>!</span> 
       </p>
       <div class="messages">
       </div>
@@ -29,8 +32,7 @@
       <div class='well sidebar-nav'>
           <h3 class='nav-header'>主题</h3>
           <p class='subject my_border'>
-              基于faye的在线及时聊天<br/>
-             我们的github地址 <a href="https://github.com/songjiayang/chater">chater</a><br/>
+              <%=@room.description%>
           </p>
       </div>
     </div>
@@ -42,14 +44,14 @@
   $('.messages').css('height',window.screen.height-285);
   $('.subject').css('max-height',window.screen.height-550);
   $('#submit').click(function(){
-     faye.publish('/messages/new', {
+     faye.publish('/room/<%=@room.id%>/messages/new', {
         username: '<%= session[:username] %>',
         msg: $('#message').val()
      });
      $('#message').val('');
      return false;
   });
-  faye.subscribe("/messages/new",function(data){  
+  faye.subscribe("/room/<%=@room.id%>/messages/new",function(data){  
       var a_new_message = ('<li><div class="user-avatar"> <img src="'+'http://l.ruby-china.org/user/large_avatar/827.jpg"');
       a_new_message +='/></div><div class="info"><span class="username">';
       a_new_message +=data.username;

@@ -5,10 +5,11 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" ,"http://localhost:9292/faye.js" %>
   <%= csrf_meta_tags %>
+	<script type="text/javascript">
+	  var faye = new Faye.Client('http://localhost:9292/faye');
+	</script>
 </head>
 <body>
-
 <%= yield %>
-
 </body>
 </html>
