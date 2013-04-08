@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   def self.image_with_email(email,username)
   	user = User.find_by_email(email.to_s)|| User.create({username:username.to_s,email:email.to_s})
-  	user.gravatar_url
+  	user.id
   end
 
 end

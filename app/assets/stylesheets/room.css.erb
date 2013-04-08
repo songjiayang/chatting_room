@@ -12,19 +12,23 @@
 	margin-left: 100px;
 	height: 100px;
 	width: 400px;
+	float: left;
 }
 
 #input-area #submit{
 	margin-top: 70px;
 	margin-left: 23px;
+	float: left;
 }
 
 #input-area .notice{
-	margin-left: -64px;
+	margin-left: 20px;
+	float: left;
+	margin-top: 75px;
 }
 
 .messages{
-	margin-top:17px;
+	margin-top:57px;
 /*	background-color: #08c;*/
   width: 100%;
   border-radius:10px;
@@ -65,18 +69,11 @@
 	
 }
 
-
 .messages li .user-avatar img{
 	width: 60px;
 	height: 60px;
 	padding: 5px;
-	border-radius: 10px;
-}
-
-.my_avater{
-	width: 20px;
-	height: 20px;
-	padding-right: 10px;
+	border-radius: 20px;
 }
 
 .messages li .info{
@@ -181,7 +178,25 @@
 #myCanvas{
 	float: left;
 	top: 0px;
-	margin-top: -50px;
+	margin-top: 0px;
 	background-color: #fff;
-	border-radius: 20px;
+	border-radius: 50px;
+}
+
+.error-message{
+	float: left;
+	width: 420px;
+	margin-left: -230px;
+	display: none;
+}
+
+.error-message p {
+	border-radius: 10px;
+	height: 20px;
+}
+
+.error-message .close{
+	padding-right: 10px;
+	padding-top: 10px;
+	cursor: pointer;
 }

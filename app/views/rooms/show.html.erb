@@ -1,16 +1,16 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span9">
-      <p class='alert alert-success welcome-message'> 
-        <img src="<%=session[:avater]%>" class="my_avater" data-content='hello <%= session[:username] %>'/>
-        <span style="float:right;">Welcome to <font id="room_title"><%=@room.title%></font> room.</span> 
-      </p>
       <div class="messages">
       </div>
       <div id="input-area">
         <textarea  id="message" class="input-xlarge"></textarea>
         <button class="btn btn-success"  id="submit">Send</button>
         <span class="notice">支持快捷键'ctrl'发送消息</span>
+        <div class='error-message'>
+         <a class="close" data-dismiss="">&times;</a>
+         <p class='alert alert-error '></p>
+        </div>
       </div>
     </div>
     <div class="span2">
@@ -38,29 +38,30 @@
 </div>
 
 <script>
+  var last_sent_time = null;
   function sent_message(){
     var message = $('#message').val();
     if (message.length<1){
-      alert("发送信息不能为空");
+        $('.error-message p').text('提示：消息内容不能为空，请输入内容');
+        $('.error-message').show();
+    }else if (last_sent_time!=null && (new Date())-last_sent_time<8000){
+        $('.error-message p').text('提示：消息发送太快，请休息一下吧');
+        $('.error-message').show();
     }else{
+      $('.error-message').hide();
       faye.publish('/room/<%=@room.id%>/messages/new', {
           username: '<%= session[:username] %>',
           msg: $('#message').val(),
-          avater: '<%=session[:avater]%>'
+          avater: '<%=current_user.gravatar_url%>'
       });
+      last_sent_time = new Date();
       $('#message').val('');
     }
     return false;
   }
   $('body').css('background',"url(<%=asset_path 'bg2.jpg'%>) no-repeat fixed bottom");
-  $('.messages').css('height',window.screen.height-285);
+  $('.messages').css('height',window.screen.height-300);
   $('.subject').css('max-height',window.screen.height-550);
-  $('.my_avater').mouseover(function() {
-     $('.my_avater').popover('show');
-  });
-  $('.my_avater').mouseout(function() {
-     $('.my_avater').popover('hide');
-  });
   $('#submit').click(function(){
       sent_message();
   });
@@ -75,7 +76,11 @@
       a_new_message +=('<span >'+ current_time()+'</span>');
       a_new_message +=('<p class="li_message">'+data.msg+'</p></div></li>');
       $('.messages').prepend(a_new_message);
-  });  
+  }); 
+
+  $('.error-message .close').click(function(){
+      $('.error-message').hide();
+  })
 
 </script>
 

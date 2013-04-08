@@ -1,40 +1,28 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <a class="brand" href=/>
-        Chater
-      </a>
-      <ul class="nav">
-        <li class="active">
-          <a href="/">Start</a>
-        </li>
-        <li>
-          <a href="/rooms/new" data-remote="true">New Room</a>
-        </li>
-
+      <a class="brand" href=/>Chater</a>
+      <ul class="nav top-bar-ul">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/rooms/new" data-remote="true">New Room</a></li>
         <li class="divider-vertical"></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#fat">
           My Favs
           <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu fav" id="fav_rooms">
-                
+          <ul class="dropdown-menu fav" id="fav_rooms"> 
                 <li><a href="/rooms/17">Feedback</a></li>          
-
           </ul>
         </li>
-
         <li class="divider-vertical"></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#fat">
           My Rooms
           <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu fav" id="fav_rooms">
-                
+          <ul class="dropdown-menu fav" id="fav_rooms">  
                 <li><a href="/rooms/41">上辅导费</a></li>          
-
           </ul>
         </li>
         
@@ -48,15 +36,15 @@
       <p class="navbar-text">
         <ul class="nav nav-pills pull-right">
           <li class="dropdown" id="menu1">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              small_fish__
+           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%=session[:username]%>
               <b class="caret"></b>              
             </a>
             <ul class="dropdown-menu">
-              <li><a href="/users/202">Home Page</a></li>
-              <li><a href="/users/202/edit">Profile Settings</a></li>
+              <li><%=link_to '个人主页',user_path(current_user)%></li>
+              <li><%=link_to '信息设置', edit_user_path(current_user) %></li>
               <li class="divider"></li>
-              <li><a href="/sign_out">Logout</a></li>
+              <li><%=link_to '退出',logout_path%></li>
             </ul>
           </li>
         </ul>
