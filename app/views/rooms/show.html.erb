@@ -6,7 +6,11 @@
       <div id="input-area">
         <textarea  id="message" class="input-xlarge"></textarea>
         <button class="btn btn-success"  id="submit">Send</button>
-        <span class="notice">支持快捷键'ctrl'发送消息</span>
+        <span class="notice">
+          <li>支持 <a href='http://wowubuntu.com/markdown/basic.html'> Markdown</a> 格式</li>
+          <li>支持 <a href='http://www.emoji-cheat-sheet.com/'> Emoji</a> 表情</li>
+          <li>支持<a href="#"> Ctrl+Enter</a> 快捷发送</li>
+        </span>
         <div class='error-message'>
          <a class="close" data-dismiss="">&times;</a>
          <p class='alert alert-error '></p>
@@ -49,13 +53,15 @@
         $('.error-message').show();
     }else{
       $('.error-message').hide();
-      faye.publish('/room/<%=@room.id%>/messages/new', {
+      $.post("/parse_message",{msg:message}).always(function(result){
+        faye.publish('/room/<%=@room.id%>/messages/new', {
           username: '<%= session[:username] %>',
-          msg: $('#message').val(),
+          msg: result.responseText,
           avater: '<%=current_user.gravatar_url%>'
+         });
+        last_sent_time = new Date();
+        $('#message').val('');
       });
-      last_sent_time = new Date();
-      $('#message').val('');
     }
     return false;
   }
@@ -66,7 +72,7 @@
       sent_message();
   });
   $(this).keyup(function(e){
-    if (e.which ==17){sent_message()};
+    if (e.keyCode == 13 && e.ctrlKey){sent_message()};
   });
   faye.subscribe("/room/<%=@room.id%>/messages/new",function(data){  
       var a_new_message = ('<li><div class="user-avatar"> <img src="'+data.avater+'"');
@@ -74,7 +80,7 @@
       a_new_message +=data.username;
       a_new_message +=('</span><span >'+(parseInt($('.messages li').size())+1)+' 楼</span>');
       a_new_message +=('<span >'+ current_time()+'</span>');
-      a_new_message +=('<p class="li_message">'+data.msg+'</p></div></li>');
+      a_new_message +=('<div class="li_message">'+data.msg+'</div></div></li>');
       $('.messages').prepend(a_new_message);
   }); 
 
