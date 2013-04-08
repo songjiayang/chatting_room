@@ -1,5 +1,7 @@
 ##What is Chater?
 Chater 是一个在线聊天室，一个实时web应用，一个基础实践.....
+演示地址：
+http://chatter9.herokuapp.com
 
 ##How to run Chater?
 
@@ -10,7 +12,7 @@ Chater 是一个在线聊天室，一个实时web应用，一个基础实践....
   rackup faye.ru -E production -s thin       #启动faye
   bundle exec rake db:create
   bundle exec rake db:migrate
-  bundle exec rake db:seed
+  bundle exec rake db:seed #初始化数据需要注入
   rails s
 
 ```
