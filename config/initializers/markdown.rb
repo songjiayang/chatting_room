@@ -1,0 +1,1 @@
+$markdown = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)

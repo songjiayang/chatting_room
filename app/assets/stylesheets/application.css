@@ -14,4 +14,15 @@
  */
 
 
+ .brand:hover{
+ 	color: #FF9933;
+	text-decoration: none;
+ }
+
+ .top-bar-ul{
+ 	padding-left: 35px;
+ }
+
+
+
 

@@ -7,6 +7,8 @@ gem 'pg', group: :production
 
 gem 'thin'
 gem 'faye'
+gem 'redcarpet'
+gem 'md_emoji'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
