@@ -5,13 +5,13 @@
       <%@rooms.each_with_index do |room,index|%>
         <li class='room_list'>
           <h5> 
-            <%=link_to room.title,chat_room_path(room),target:'_blank'%>
+            <%=link_to truncate(room.title,:length => 25, :omission => '... '),chat_room_path(room),target:'_blank'%>
             <a class='like unfav' title='Fav It'>❤</a>
            </h5>
         <p class='desc'><%=room.description%></p>
         <p class='stats'>
-          <a class='left' title='Online Users Count' >9</a>
-          <a class='right' title='Messages Count'>12</a>
+          <a class='left' title='Online Users Count' >0</a>
+          <a class='right' title='Messages Count'>0</a>
         </p>
        </li>
       <%end%>

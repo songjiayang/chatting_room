@@ -1,0 +1,8 @@
+ <div class='my_room_list' >
+ 	<legend>我的房间</legend>
+ 	<div class='my_room_list_li'>
+	    <% current_user.rooms.reverse.each do |room|%>
+	        <li> <%=link_to truncate(room.title,:length => 45, :omission => '... '), (chat_room_path room),class:'link_to'%></li>
+	    <%end%> 
+    </div>
+  </div>

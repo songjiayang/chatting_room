@@ -1,0 +1,45 @@
+<div id='room_message'>
+        <%if flash[:error]%>
+        <div class='alert alert-error'>
+          <a class='close' data-dismiss='alert' href='#'>×</a>
+           <%=flash[:error]%>
+        </div>
+      <%elsif flash[:success] %>
+        <div class='alert alert-success'>
+          <a class='close' data-dismiss='alert' href='#'>×</a>
+           <%=flash[:success]%>
+        </div>
+      <%end%>
+</div>
+
+<div id="rooms">
+ 	<table class="table table-condensed table-striped">
+  <thead>
+      <th class="header pjax headerSortDown id_field integer_type">编号</th>
+      <th class="  commentable_field polymorphic_association_type">标题</th>
+      <th class="header pjax  created_at_field datetime_type">创建时间</th>
+      <th class="header pjax  created_at_field datetime_type">收藏人数</th>
+      <th class="last shrink"></th>
+      </tr>
+  </thead>
+<tbody>
+	<%@rooms.each do |room|%>
+	<tr>
+       <td><%=room.id%></td>
+       <td class='room_title'><%=link_to truncate(room.title,:length => 65, :omission => '... '), chat_room_path(room)%></td>
+       <td><%=room.created_at.localtime.to_s(:db)%></td>
+       <td>0</td>
+        <td class="last links">
+           <ul class="inline">
+           	<%=link_to raw('<i class="icon-info-sign"></i>'),chat_room_path(room),title:'查看'%>
+           	<%=link_to raw('<i class="icon-pencil"></i>'),edit_room_path(room),title:'修改'%>
+           	 <%= link_to raw('<i class="icon-remove"></i>'), room_path(room), method: :delete, data: { confirm: 'Are you sure?' } , title: '删除' %>
+          </ul>
+        </td>
+        </tr>
+	   <%end%>    
+</tbody>
+</body>
+ <%= will_paginate @rooms %>
+ </div>
+

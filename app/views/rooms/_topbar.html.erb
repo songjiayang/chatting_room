@@ -3,16 +3,14 @@
     <div class="container-fluid">
       <a class="brand" href=/>Chater</a>
       <ul class="nav top-bar-ul">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/rooms/new" data-remote="true">New Room</a></li>
+        <li class="<%='active' if action_name=='index'%>"><a href="/">Home</a></li>
+        <li class="<%='active' if action_name=='new'%>"><%=link_to 'New Room', new_chat_room_path%></li>
         <li class="divider-vertical"></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#fat">
-          My Favs
-          <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu fav" id="fav_rooms"> 
-                <li><a href="/rooms/17">Feedback</a></li>          
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#fat">My Favs
+          <b class="caret"></b></a>
+          <ul class="dropdown-menu fav" id="top_bar_rooms"> 
+                暂无        
           </ul>
         </li>
         <li class="divider-vertical"></li>
@@ -21,8 +19,14 @@
           My Rooms
           <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu fav" id="fav_rooms">  
-                <li><a href="/rooms/41">上辅导费</a></li>          
+          <ul class="dropdown-menu fav" id="top_bar_rooms">  
+            <% current_user.rooms.last(5).each do |room|%>
+               <li> <%=link_to truncate(room.title,:length => 25, :omission => '... '), (chat_room_path room)%></li>
+            <%end%> 
+            <% if current_user.rooms.size >5%>
+                <li class="divider"></li>
+                <li><%=link_to '更多',my_room_path%></li>
+            <%end%>         
           </ul>
         </li>
         
@@ -43,6 +47,7 @@
             <ul class="dropdown-menu">
               <li><%=link_to '个人主页',user_path(current_user)%></li>
               <li><%=link_to '信息设置', edit_user_path(current_user) %></li>
+              <li><%=link_to '我的房间', my_room_path%></li>
               <li class="divider"></li>
               <li><%=link_to '退出',logout_path%></li>
             </ul>

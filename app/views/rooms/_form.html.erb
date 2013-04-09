@@ -1,0 +1,58 @@
+
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span9">
+      <div class='room_form'>
+        <%= form_for @room do |f|%>
+            <fieldset class='room-form'>
+               <legend>新建房间</legend>
+                   <p class="alert">
+                      <a class="close" >×</a>
+                      <span id='alert-message'><%=flash[:error]%></span>
+                    </p>
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.text_field :title, class:"input-small",placeholder:"标题"%>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                    <%= f.text_area :description, class:"form-description",placeholder:"描述"%>
+                  </div>
+                </div>
+
+                 <div class="control-group">
+                  <div class="controls action">
+                    <%= f.submit 'submit', class:'btn btn-success', id:'room-form-submit'%>
+                    <%=link_to 'back',chat_rooms_path, class:'btn btn-info'%>
+                  </div>
+                </div>
+            </fieldset>
+        <%end%>
+      </div>
+    </div>
+    <div class="span3">
+        <%= render :partial => "my_room_list"%>
+   </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+   $('#room-form-submit').click(function(){
+      if($('#room_title').val().length<1||$('#room_description').val().length<1){
+        $('#alert-message').text('标题和描述不能为空');
+        $('.alert').show();
+        return false;
+      }else{
+        return true;
+      }
+    });
+   $('.close').click(function(){
+      $('.alert').hide();
+   });
+    if($('#alert-message').text().length>0) {$('.alert').show()};
+</script>
