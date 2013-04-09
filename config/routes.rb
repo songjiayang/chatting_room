@@ -9,6 +9,7 @@ MyChatter::Application.routes.draw do
  get '/chatrooms/my'=> 'rooms#rooms', :as=>:my_room
  resources :rooms, :only=>[:create,:edit,:update,:destroy] 
  post '/parse_message'=>'rooms#sent_message'
+ post '/online_user' => 'rooms#online_user'
  resources :users
  root :to => 'rooms#index'
 end

@@ -10,7 +10,7 @@
            </h5>
         <p class='desc'><%=room.description%></p>
         <p class='stats'>
-          <a class='left' title='Online Users Count' >0</a>
+          <a class='left' title='Online Users Count' ><%=Room.online_user_number(room.id)%></a>
           <a class='right' title='Messages Count'>0</a>
         </p>
        </li>

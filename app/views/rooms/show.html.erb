@@ -2,6 +2,20 @@
   <div class="row-fluid">
     <div class="span9">
       <div class="messages">
+        <% count = @room.sms.count%>
+        <%@room.sms.reverse.each_with_index do |sms,index|%>
+         <li>
+          <div class="user-avatar"> 
+            <img src="<%=sms.user.gravatar_url%>"></div>
+            <div class="info">
+              <span class="username"><%=sms.user.username%></span>
+              <span><%=count-index%> 楼</span>
+              <span><%=sms.created_at.localtime.to_s(:db)%></span>
+              <div class="li_message"><%=raw sms.content%></div>
+          </div>
+          </li>
+        <%end%>
+
       </div>
       <div id="input-area">
         <textarea  id="message" class="input-xlarge"></textarea>
@@ -18,8 +32,12 @@
       </div>
     </div>
     <div class="span2">
-      <div class='well sidebar-nav fenxiang' >
-          <h3 class='nav-header'>喜欢我就分享我吧</h3>
+      <div class='well sidebar-nav'>
+          <h3 class='nav-header'>主题</h3>
+          <p class='subject my_border' >
+              <%=@room.description%>
+          </p>
+          <br/>
           <div class='fenxiang-button my_border'>
               <div class="jiathis_style_24x24">
                 <a class="jiathis_button_qzone"></a>
@@ -28,13 +46,15 @@
                 <a class="jiathis_button_weixin"></a>
                 <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
               </div>
-              <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1353687894005453" charset="utf-8"></script>
-          </div>  
+          <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1353687894005453" charset="utf-8"></script>
+              
+          </div>
       </div>
-      <div class='well sidebar-nav'>
-          <h3 class='nav-header'>主题</h3>
-          <p class='subject my_border'>
-              <%=@room.description%>
+       <div class='well sidebar-nav'>
+          <h3 class='nav-header'>统计</h3>
+          <p class='statistics'>
+              <li>在线人数 <span id="user_online"><%=@online_user%></span></li>
+              <li>发言条数 <span id='count'><%=count%></span></li>
           </p>
       </div>
     </div>
@@ -53,7 +73,7 @@
         $('.error-message').show();
     }else{
       $('.error-message').hide();
-      $.post("/parse_message",{msg:message}).always(function(result){
+      $.post("/parse_message",{msg:message,room_id:<%=@room.id%>}).always(function(result){
         faye.publish('/room/<%=@room.id%>/messages/new', {
           username: '<%= session[:username] %>',
           msg: result.responseText,
@@ -66,7 +86,7 @@
     return false;
   }
   $('.messages').css('height',window.screen.height-300);
-  $('.subject').css('max-height',window.screen.height-550);
+  $('.subject').css('max-height',window.screen.height-620);
   $('#submit').click(function(){
       sent_message();
   });
@@ -81,11 +101,20 @@
       a_new_message +=('<span >'+ current_time()+'</span>');
       a_new_message +=('<div class="li_message">'+data.msg+'</div></div></li>');
       $('.messages').prepend(a_new_message);
+      $('#count').text(parseInt($('#count').text())+1);
   }); 
 
   $('.error-message .close').click(function(){
       $('.error-message').hide();
-  })
+  });
+
+
+  function flush_user_number(){
+    $.post("/online_user",{room_id:<%=@room.id%>}).always(function(result){  
+        $('#user_online').text(result);
+    });
+  }
+  setInterval("flush_user_number()",30000);
 
 </script>
 

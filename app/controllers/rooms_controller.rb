@@ -7,12 +7,15 @@ class RoomsController < ApplicationController
   	@rooms = Room.order("id desc").paginate(:page => params[:page], :per_page => 12) 
   end
 
-  def show
+  def show 
   	@room = Room.find(params[:id])
+    @online_user = @room.flush_online_user(current_user.id)
   end
 
   def sent_message
-      render json:$markdown.render(params[:msg])
+      content = $markdown.render(params[:msg])
+      Sms.create({content:content,room_id:params[:room_id],user_id:current_user.id})
+      render json:content
   end
 
   def new
@@ -53,4 +56,9 @@ class RoomsController < ApplicationController
       redirect_to my_room_path
     end
   end
+
+  def online_user
+    render json:Room.online_user_number(params[:room_id])
+  end
+  
 end
