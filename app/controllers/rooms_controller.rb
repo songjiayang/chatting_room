@@ -66,7 +66,7 @@ class RoomsController < ApplicationController
   end
 
   def online_user
-    render json:Room.online_user_number(params[:room_id])
+    render json:Room.find(params[:room_id]).flush_online_user(current_user.id)
   end
 
 end
