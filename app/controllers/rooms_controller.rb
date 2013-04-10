@@ -4,13 +4,21 @@ class RoomsController < ApplicationController
 	before_filter :authcation_with_user
   
   def index
-  	@rooms = Room.order("id desc").paginate(:page => params[:page], :per_page => 12) 
+    if params[:kw].to_s.blank?
+  	  @rooms = Room.order("id desc").paginate(:page => params[:page], :per_page => 12) 
+    else
+      @rooms = Room.where('title like  ?',"%"+params[:kw].to_s+"%").order("id desc").paginate(:page => params[:page], :per_page => 12) 
+    end
   end
 
   def show 
-  	@room = Room.find(params[:id])
-    @online_user = @room.flush_online_user(current_user.id)
-  end
+    begin
+      @room = Room.find(params[:id].to_i)
+      @online_user = @room.flush_online_user(current_user.id)     
+    rescue Exception => e
+      redirect_to '/404'
+    end
+ end
 
   def sent_message
       content = $markdown.render(params[:msg])
@@ -60,5 +68,5 @@ class RoomsController < ApplicationController
   def online_user
     render json:Room.online_user_number(params[:room_id])
   end
-  
+
 end

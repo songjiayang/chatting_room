@@ -10,7 +10,13 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#fat">My Favs
           <b class="caret"></b></a>
           <ul class="dropdown-menu fav" id="top_bar_rooms"> 
-                暂无        
+            <% if current_user.favourites.any?%>
+              <% current_user.favourites.each do |favorate|%>
+                 <li id='fav_<%=favorate.id%>'> <%=link_to truncate(favorate.room.title,:length => 25, :omission => '... '), (chat_room_path favorate.room)%></li>
+              <%end%>    
+            <%else%> 
+               暂无喜欢   
+            <%end%>
           </ul>
         </li>
         <li class="divider-vertical"></li>
@@ -32,10 +38,10 @@
         
       </ul>
 
-      <form class="navbar-search pull-left" action="/goto" method="post" id="goto">
-        <input type="text" class="search-query span2" placeholder="Room To Go" name="id">
-        <input name="authenticity_token" type="hidden" value="19asKlq5UXru64BtMDq9thRKXghdzvkuB9zYdAe1pPY=" />
-      </form>
+
+      <%=form_tag '/q', :method => :get, class:"navbar-search pull-left"%>
+          <input type="text" class="search-query span2" placeholder="Room To Go" name="kw">
+       </form>
 
       <p class="navbar-text">
         <ul class="nav nav-pills pull-right">

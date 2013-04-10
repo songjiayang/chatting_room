@@ -6,7 +6,7 @@
 
 function current_time () {
 	var d = new Date();
-	year ="20"+ (d.getYear()-100);
+	year =d.getFullYear();
 	mon = d.getMonth()+1;
 	date =d.getDate();
 	hour = d.getHours();

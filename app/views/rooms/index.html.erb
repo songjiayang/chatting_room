@@ -6,12 +6,12 @@
         <li class='room_list'>
           <h5> 
             <%=link_to truncate(room.title,:length => 25, :omission => '... '),chat_room_path(room),target:'_blank'%>
-            <a class='like unfav' title='Fav It'>❤</a>
+            <a <%=raw (Favourite.user_index_room?(room.id,current_user.id)? 'class="unfav" title="Unfav It"':'class="like" title="Fav It"')%> id="<%=room.id%>" >❤</a>
            </h5>
         <p class='desc'><%=room.description%></p>
         <p class='stats'>
           <a class='left' title='Online Users Count' ><%=Room.online_user_number(room.id)%></a>
-          <a class='right' title='Messages Count'>0</a>
+          <a class='right' title='Messages Count'><%=room.sms.count%></a>
         </p>
        </li>
       <%end%>
@@ -30,6 +30,25 @@
    $('#myCanvas').mouseout(function() {
      $('#myCanvas').popover('hide');
   });
+
+   $('.room_list h5 a').click(function(){
+     var clicker = $(this);
+     var room_id = $(this).attr('id');  
+     var type = $(this).attr('class');
+     $.post("/fav_or_unfav", { room_id: room_id, type: type},
+       function(data){
+         if(parseInt(data)>0){
+            if(type=="like"){
+                clicker.attr('class','unfav');
+                clicker.attr('title','Unfav It');
+            }else{
+                clicker.attr('class','like');
+                clicker.attr('title','Fav It');
+                $("#fav_"+data).hide();
+            }
+         }
+       }, "json");
+   });
  
 </script>
 

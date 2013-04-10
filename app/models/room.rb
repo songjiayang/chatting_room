@@ -3,7 +3,7 @@ class Room < ActiveRecord::Base
   validates :description, :title, :presence => true
   belongs_to :user
   has_many :sms, :class_name=>'Sms', :dependent=>:destroy
-
+  has_many :favourites, :dependent=>:destroy
 
   def flush_online_user(user_id)
   	key = "on_line_user_of_number_#{id}"
@@ -25,7 +25,11 @@ class Room < ActiveRecord::Base
   	if users.blank?
   		0 
   	else
-  		(JSON.parse users).size
+  	  users = JSON.parse $redis.get(key)
+      users = users.select{|k,v| (Time.parse v.to_s)>2.minute.ago.localtime}
+      $redis.set(key,users.to_json)
+      users.count
   	end
   end
+
 end
