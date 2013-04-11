@@ -1,7 +1,8 @@
 class Room < ActiveRecord::Base
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :password, :category_id
   validates :description, :title, :presence => true
   belongs_to :user
+  belongs_to :category
   has_many :sms, :class_name=>'Sms', :dependent=>:destroy
   has_many :favourites, :dependent=>:destroy
 

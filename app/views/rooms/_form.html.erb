@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span9">
@@ -13,7 +11,12 @@
                     </p>
                 <div class="control-group">
                   <div class="controls">
-                    <%= f.text_field :title, class:"input-small",placeholder:"标题"%>
+                    <%= f.text_field :title, class:"input-small",placeholder:"标题",class:'input'%>
+                  </div>
+                </div>
+                 <div class="control-group">
+                  <div class="controls category">
+                    <%= f.select :category_id, Category.all.collect {|c| [ c.name, c.id ] },include_blank:false %>
                   </div>
                 </div>
                 <div class="control-group">
@@ -28,6 +31,7 @@
                     <%=link_to 'back',chat_rooms_path, class:'btn btn-info'%>
                   </div>
                 </div>
+
             </fieldset>
         <%end%>
       </div>
